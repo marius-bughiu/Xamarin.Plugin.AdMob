@@ -13,9 +13,9 @@
     <Title>Xamarin.Plugin.AdMob</Title>
     <Description>Xamarin.Plugin.AdMob: cross-platform ads for your app</Description>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <AssemblyFileVersion>0.1.0.0</AssemblyFileVersion>
-    <Version>0.1.0-alpha</Version>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <AssemblyFileVersion>0.1.1.0</AssemblyFileVersion>
+    <Version>0.1.1-alpha</Version>
     <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
     <Authors>Marius Bughiu</Authors>
     <Owners>marius.bughiu</Owners>
@@ -67,9 +67,14 @@
     <Compile Include="**\*.uwp.*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="Xamarin.GooglePlayServices.Ads.Lite" Version="42.1021.1" />
     <Compile Include="**\*.android.cs" />
     <Compile Include="**\*.android.*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid7')) ">
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads.Lite" Version="42.1021.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid8')) ">
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads.Lite" Version="60.1142.0" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <PackageReference Include="Xamarin.Google.iOS.MobileAds" Version="7.27.0.3" />

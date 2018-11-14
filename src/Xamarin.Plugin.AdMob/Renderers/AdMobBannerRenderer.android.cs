@@ -48,5 +48,10 @@ namespace Xamarin.Plugin.AdMob.Renderers
                 SetNativeControl(ad);
             }
         }
+
+        /// <summary>
+        /// Used for registration with dependency service
+        /// </summary>
+        public static void Init() { }
     }
 }
