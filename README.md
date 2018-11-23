@@ -24,6 +24,12 @@ Also, for the ads to work, you need to update your app's manifest to include the
 
 ## Displaying a banner ad
 
+Configure your default ad unit ID in your `App`'s constructor in `App.xaml.cs`.
+
+```
+AdMobBanner.AndroidAdUnitId = "ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx";
+```
+
 ### XAML
 
 Add the controls namespace at the top of your page:
@@ -42,5 +48,4 @@ and then place the banned in your page.
 
 ```
 var bannerAd = new AdMobBanner();
-Grid.SetRow(bennerAd, 1);
-this.LayoutRoot.Children.Add(bannerAd);
+```
