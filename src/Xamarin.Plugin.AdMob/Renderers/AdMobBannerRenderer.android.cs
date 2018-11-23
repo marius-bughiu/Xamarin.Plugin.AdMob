@@ -1,10 +1,10 @@
 ﻿using Android.Content;
+using Android.Gms.Ads;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Plugin.AdMob.Controls;
 using Xamarin.Plugin.AdMob.Renderers;
-using Android.Gms.Ads;
-using System.Diagnostics;
 
 [assembly: ExportRenderer(typeof(AdMobBanner), typeof(AdMobBannerRenderer))]
 namespace Xamarin.Plugin.AdMob.Renderers

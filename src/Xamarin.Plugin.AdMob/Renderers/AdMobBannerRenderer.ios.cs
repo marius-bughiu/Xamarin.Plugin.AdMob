@@ -37,11 +37,8 @@ namespace Xamarin.Plugin.AdMob.Renderers
 
                 var request = Request.GetDefaultRequest();
 
-                if (!Debugger.IsAttached)
-                {
-                    e.NewElement.HeightRequest = GetSmartBannerDpHeight();
-                    adView.LoadRequest(request);
-                }
+                e.NewElement.HeightRequest = GetSmartBannerDpHeight();
+                adView.LoadRequest(request);
 
                 base.SetNativeControl(adView);
             }
