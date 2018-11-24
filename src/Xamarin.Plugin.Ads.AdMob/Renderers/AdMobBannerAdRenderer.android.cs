@@ -1,17 +1,16 @@
 ﻿using Android.Content;
 using Android.Gms.Ads;
-using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Xamarin.Plugin.AdMob.Controls;
-using Xamarin.Plugin.AdMob.Renderers;
+using Xamarin.Plugin.AdMob;
+using Xamarin.Plugin.Ads;
 
-[assembly: ExportRenderer(typeof(AdMobBanner), typeof(AdMobBannerRenderer))]
-namespace Xamarin.Plugin.AdMob.Renderers
+[assembly: ExportRenderer(typeof(BannerAd), typeof(AdMobBannerAdRenderer))]
+namespace Xamarin.Plugin.AdMob
 {
-    public class AdMobBannerRenderer : ViewRenderer
+    public class AdMobBannerAdRenderer : ViewRenderer
     {
-        public AdMobBannerRenderer(Context context) : base(context)
+        public AdMobBannerAdRenderer(Context context) : base(context)
         {
 
         }
@@ -34,16 +33,13 @@ namespace Xamarin.Plugin.AdMob.Renderers
                 var ad = new AdView(Context)
                 {
                     AdSize = AdSize.SmartBanner,
-                    AdUnitId = AdMobBanner.AndroidAdUnitId
+                    AdUnitId = (e.NewElement as BannerAd).AdUnitId
                 };
 
                 var requestbuilder = new AdRequest.Builder();
 
-                if (!Debugger.IsAttached)
-                {
-                    ad.LoadAd(requestbuilder.Build());
-                    e.NewElement.HeightRequest = GetSmartBannerDpHeight();
-                }
+                ad.LoadAd(requestbuilder.Build());
+                e.NewElement.HeightRequest = GetSmartBannerDpHeight();
 
                 SetNativeControl(ad);
             }

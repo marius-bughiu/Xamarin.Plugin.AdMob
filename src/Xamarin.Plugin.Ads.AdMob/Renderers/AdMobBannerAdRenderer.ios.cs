@@ -1,15 +1,14 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
-using Google.MobileAds;
+﻿using Google.MobileAds;
 using UIKit;
-using Xamarin.Plugin.AdMob.Controls;
-using Xamarin.Plugin.AdMob.Renderers;
-using System.Diagnostics;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+using Xamarin.Plugin.Ads;
+using Xamarin.Plugin.AdMob;
 
-[assembly: ExportRenderer(typeof(AdMobBanner), typeof(AdMobBannerRenderer))]
-namespace Xamarin.Plugin.AdMob.Renderers
+[assembly: ExportRenderer(typeof(BannerAd), typeof(AdMobBannerAdRenderer))]
+namespace Xamarin.Plugin.AdMob
 {
-    public class AdMobBannerRenderer : ViewRenderer
+    public class AdMobBannerAdRenderer : ViewRenderer
     {
         BannerView adView;
         bool viewOnScreen;
@@ -25,7 +24,7 @@ namespace Xamarin.Plugin.AdMob.Renderers
             {
                 adView = new BannerView(AdSizeCons.SmartBannerPortrait)
                 {
-                    AdUnitID = AdMobBanner.iOSAdUnitId,
+                    AdUnitID = (e.NewElement as BannerAd).AdUnitId,
                     RootViewController = GetRootViewController()
                 };
 
