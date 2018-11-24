@@ -7,7 +7,7 @@
     <AssemblyName>Xamarin.Plugin.Ads.Base</AssemblyName>
     <RootNamespace>Xamarin.Plugin.Ads.Base</RootNamespace>
     <PackageId>Xamarin.Plugin.Ads.Base</PackageId>
-    <PackageIconUrl>https://raw.githubusercontent.com/xamarin/Essentials/master/Assets/xamarin.essentials_128x128.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/marius-bughiu/Xamarin.Plugin.Ads/master/Assets/xamarin.plugin.ads_128x128.png</PackageIconUrl>
     <Summary>Xamarin.Plugin.Ads: cross-platform ads for your app</Summary>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms, admob, ads</PackageTags>
     <Title>Xamarin.Plugin.Ads.Base</Title>
