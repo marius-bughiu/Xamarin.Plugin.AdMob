@@ -2,11 +2,13 @@
 using Android.Gms.Ads;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Xamarin.Plugin.AdMob;
+using Xamarin.Plugin.Ads.AdMob;
 using Xamarin.Plugin.Ads;
+using Xamarin.Plugin.Ads.AdMob.Helpers;
+using Xamarin.Plugin.Ads.Base;
 
 [assembly: ExportRenderer(typeof(BannerAd), typeof(AdMobBannerAdRenderer))]
-namespace Xamarin.Plugin.AdMob
+namespace Xamarin.Plugin.Ads.AdMob
 {
     public class AdMobBannerAdRenderer : ViewRenderer
     {
@@ -15,13 +17,10 @@ namespace Xamarin.Plugin.AdMob
 
         }
 
-        private int GetSmartBannerDpHeight()
+        private int GetSmartBannerHeightDp()
         {
-            var dpHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
-
-            if (dpHeight <= 400) return 32;
-            if (dpHeight > 400 && dpHeight <= 720) return 50;
-            return 90;
+            var screenHeightDp = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
+            return AdMobAdSizeHelper.GetSmartBannerHeight(screenHeightDp);
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<View> e)
@@ -30,18 +29,27 @@ namespace Xamarin.Plugin.AdMob
 
             if (Control == null)
             {
-                var ad = new AdView(Context)
+                var adView = new AdView(Context)
                 {
                     AdSize = AdSize.SmartBanner,
                     AdUnitId = (e.NewElement as BannerAd).AdUnitId
                 };
 
-                var requestbuilder = new AdRequest.Builder();
+                if (AdConfig.TestingModeEnabled)
+                {
+                    adView.AdUnitId = "ca-app-pub-3940256099942544/6300978111";
+                }
 
-                ad.LoadAd(requestbuilder.Build());
-                e.NewElement.HeightRequest = GetSmartBannerDpHeight();
+                var requestBuilder = new AdRequest.Builder();
+                foreach (var testDeviceId in AdConfig.TestDevices)
+                {
+                    requestBuilder.AddTestDevice(testDeviceId);
+                }
 
-                SetNativeControl(ad);
+                adView.LoadAd(requestBuilder.Build());
+                e.NewElement.HeightRequest = GetSmartBannerHeightDp();
+
+                SetNativeControl(adView);
             }
         }
 
