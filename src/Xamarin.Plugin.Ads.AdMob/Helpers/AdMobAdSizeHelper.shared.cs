@@ -20,5 +20,13 @@ namespace Xamarin.Plugin.Ads.AdMob.Helpers
 
             return 90;
         }
+
+        //public Tuple<int, int> GetBannerSizeRequest(AdSizeEnum? adSize, float screenHeightDp)
+        //{
+        //    if (adSize == null)
+        //    {
+        //        adSize = AdSizeEnum.SmartBanner;
+        //    }
+        //}
     }
 }

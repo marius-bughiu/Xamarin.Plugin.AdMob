@@ -1,12 +1,14 @@
 # Xamarin.Plugin.AdMob
-Cross-platform ads for your app.
+Cross-platform ads for your Xamarin Forms app.
+
+*This project has no affiliation with the Microsoft or the Xamarin teams.*
 
 ## Android setup
 
 In order to register the renderers, you must call their `Init` method in the `OnCreate` method of your `MainActivity`.
 
 ```
-Xamarin.Plugin.AdMob.Renderers.AdMobBannerRenderer.Init();
+Xamarin.Plugin.Ads.AdMob.AdMobBannerRenderer.Init();
 ```
 
 Also, for the ads to work, you need to update your app's manifest to include the `AdActivity` and the `ACCESS_NETWORK_STATE` and `INTERNET` permissions. Like so:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Xamarin.Plugin.Ads.Base
+namespace Xamarin.Plugin.Ads
 {
     public static class AdConfig
     {

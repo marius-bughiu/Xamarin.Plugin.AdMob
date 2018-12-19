@@ -6,55 +6,58 @@ using Xamarin.Forms.Platform.iOS;
 using Xamarin.Plugin.Ads;
 using Xamarin.Plugin.Ads.AdMob;
 using Xamarin.Plugin.Ads.AdMob.Helpers;
-using Xamarin.Plugin.Ads.Base;
 
 [assembly: ExportRenderer(typeof(BannerAd), typeof(AdMobBannerAdRenderer))]
 namespace Xamarin.Plugin.Ads.AdMob
 {
-    public class AdMobBannerAdRenderer : ViewRenderer
+    public class AdMobBannerAdRenderer : ViewRenderer<BannerAd, BannerView>
     {
-        BannerView adView;
-        bool viewOnScreen;
+        private bool _viewOnScreen;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.View> e)
+        public BannerAd FormsControl { get; set; }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<BannerAd> e)
         {
             base.OnElementChanged(e);
 
-            if (e.NewElement == null)
-                return;
-
-            if (e.OldElement == null)
+            if (Control != null || e.NewElement == null)
             {
-                var formsView = e.NewElement as BannerAd;
-
-                adView = new BannerView(AdSizeCons.SmartBannerPortrait)
-                {
-                    AdUnitID = formsView.AdUnitId,
-                    RootViewController = GetRootViewController()
-                };
-
-                if (AdConfig.TestingModeEnabled)
-                {
-                    adView.AdUnitID = "ca-app-pub-3940256099942544/6300978111";
-                }
-
-                adView.AdReceived += (sender, args) =>
-                {
-                    if (!viewOnScreen) this.AddSubview(adView);
-                    viewOnScreen = true;
-                };
-
-                var request = Request.GetDefaultRequest();
-                if (AdConfig.TestDevices.Any())
-                {
-                    request.TestDevices = AdConfig.TestDevices.ToArray();
-                }
-
-                e.NewElement.HeightRequest = GetSmartBannerDpHeight();
-                adView.LoadRequest(request);
-
-                base.SetNativeControl(adView);
+                return;
             }
+
+            FormsControl = e.NewElement;
+
+            var adView = new BannerView(GetAdSize())
+            {
+                AdUnitID = FormsControl.AdUnitId,
+                RootViewController = GetRootViewController()
+            };
+
+            if (AdConfig.TestingModeEnabled)
+            {
+                adView.AdUnitID = AdMobTestAdUnits.Banner;
+            }
+
+            adView.AdReceived += (sender, args) =>
+            {
+                if (!_viewOnScreen)
+                {
+                    AddSubview(adView);
+                }
+
+                _viewOnScreen = true;
+            };
+
+            var request = Request.GetDefaultRequest();
+            if (AdConfig.TestDevices.Any())
+            {
+                request.TestDevices = AdConfig.TestDevices.ToArray();
+            }
+
+            e.NewElement.HeightRequest = GetSmartBannerDpHeight();
+            adView.LoadRequest(request);
+
+            SetNativeControl(adView);
         }
 
         private UIViewController GetRootViewController()
@@ -68,6 +71,20 @@ namespace Xamarin.Plugin.Ads.AdMob
             }
 
             return null;
+        }
+
+        private AdSize GetAdSize()
+        {
+            switch (FormsControl.AdSize)
+            {
+                case AdSizeEnum.Banner: return AdSizeCons.Banner;
+                case AdSizeEnum.LargeBanner: return AdSizeCons.LargeBanner;
+                case AdSizeEnum.MediumRectangle: return AdSizeCons.MediumRectangle;
+                case AdSizeEnum.FullBanner: return AdSizeCons.FullBanner;
+                case AdSizeEnum.Leaderboard: return AdSizeCons.Leaderboard;
+                case AdSizeEnum.Custom: return new AdSize { Size = new CoreGraphics.CGSize(FormsControl.Width, FormsControl.Height) };
+                default: return AdSizeCons.SmartBannerPortrait;
+            }
         }
 
         private int GetSmartBannerDpHeight()
