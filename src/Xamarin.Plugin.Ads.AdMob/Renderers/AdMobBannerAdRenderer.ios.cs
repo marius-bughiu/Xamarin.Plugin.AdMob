@@ -33,6 +33,11 @@ namespace Xamarin.Plugin.Ads.AdMob
                 RootViewController = GetRootViewController()
             };
 
+            if (string.IsNullOrEmpty(adView.AdUnitID) && !string.IsNullOrEmpty(AdConfig.DefaultBannerAdUnitId))
+            {
+                adView.AdUnitID = AdConfig.DefaultBannerAdUnitId;
+            }
+
             if (AdConfig.TestingModeEnabled)
             {
                 adView.AdUnitID = AdMobTestAdUnits.Banner;

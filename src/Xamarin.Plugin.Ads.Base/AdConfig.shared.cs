@@ -6,6 +6,10 @@ namespace Xamarin.Plugin.Ads
 {
     public static class AdConfig
     {
+        public static string DefaultBannerAdUnitId { get; set; }
+
+        public static string DefaultInterstitialAdUnitId { get; set; }
+
         private static List<string> _testDevices;
 
         public static IReadOnlyCollection<string> TestDevices => _testDevices.AsReadOnly();

@@ -8,6 +8,10 @@ namespace Xamarin.Plugin.Ads.AdMob.Services
     {
         void PrepareAd(string adUnitId);
 
+        void PrepareAd();
+
         void ShowAd();
+
+        void Init();
     }
 }

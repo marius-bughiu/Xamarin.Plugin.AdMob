@@ -15,6 +15,11 @@ namespace Xamarin.Plugin.Ads.AdMob.Services
 
         public void PrepareAd(string adUnitId)
         {
+            if (string.IsNullOrEmpty(adUnitId) && !string.IsNullOrEmpty(AdConfig.DefaultInterstitialAdUnitId))
+            {
+                adUnitId = AdConfig.DefaultInterstitialAdUnitId;
+            }
+
             if (ad != null)
             {
                 if (!ad.IsLoaded && !ad.IsLoading)
@@ -56,6 +61,16 @@ namespace Xamarin.Plugin.Ads.AdMob.Services
             {
                 ad.Show();
             }
+        }
+
+        public void PrepareAd()
+        {
+            PrepareAd(null);
+        }
+
+        public void Init()
+        {
+
         }
     }
 

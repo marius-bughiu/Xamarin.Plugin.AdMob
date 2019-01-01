@@ -13,9 +13,9 @@
     <Title>Xamarin.Plugin.Ads.Base</Title>
     <Description>Cross-platform ads for your app.</Description>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>0.1.6.0</AssemblyVersion>
-    <AssemblyFileVersion>0.1.6.0</AssemblyFileVersion>
-    <Version>0.1.6-alpha</Version>
+    <AssemblyVersion>0.1.9.0</AssemblyVersion>
+    <AssemblyFileVersion>0.1.9.0</AssemblyFileVersion>
+    <Version>0.1.9-alpha</Version>
     <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
     <Authors>Marius Bughiu</Authors>
     <Owners>marius.bughiu</Owners>
