@@ -68,7 +68,7 @@ namespace Xamarin.Plugin.Ads.AdMob.Services
             PrepareAd(null);
         }
 
-        public void Init()
+        public static void Init()
         {
 
         }

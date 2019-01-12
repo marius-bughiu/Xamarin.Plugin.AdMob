@@ -11,7 +11,5 @@ namespace Xamarin.Plugin.Ads.AdMob.Services
         void PrepareAd();
 
         void ShowAd();
-
-        void Init();
     }
 }
